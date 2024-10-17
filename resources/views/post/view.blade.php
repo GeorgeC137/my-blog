@@ -5,7 +5,7 @@
         <article class="flex flex-col shadow my-4">
             <!-- Article Image -->
             <a href="#" class="hover:opacity-75">
-                <img src="{{ $post->getThumbnail() }}">
+                <img src="{{ $post->getThumbnail() }}" alt="" class="aspect-[4/3] object-contain">
             </a>
             <div class="bg-white flex flex-col justify-start p-6">
                 <div class="flex gap-4">
@@ -23,6 +23,8 @@
                 <div>
                     {!! $post->body !!}
                 </div>
+
+                <livewire:post-votes :post="$post" />
             </div>
         </article>
 
@@ -39,12 +41,14 @@
                 @endif
             </div>
             <div class="w-1/2">
-                <a href="{{ route('view', $next) }}"
-                    class="block w-full bg-white shadow hover:shadow-md text-right p-6">
-                    <p class="text-lg text-blue-800 font-bold flex items-center justify-end">Next <i
-                            class="fas fa-arrow-right pl-1"></i></p>
-                    <p class="pt-2">{{ \Illuminate\Support\Str::words($next->title, 5) }}</p>
-                </a>
+                @if ($next)
+                    <a href="{{ route('view', $next) }}"
+                        class="block w-full bg-white shadow hover:shadow-md text-right p-6">
+                        <p class="text-lg text-blue-800 font-bold flex items-center justify-end">Next <i
+                                class="fas fa-arrow-right pl-1"></i></p>
+                        <p class="pt-2">{{ \Illuminate\Support\Str::words($next->title, 5) }}</p>
+                    </a>
+                @endif
             </div>
         </div>
 

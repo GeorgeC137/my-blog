@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Carbon\Carbon;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\PostView;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon as SupportCarbon;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends Controller
@@ -29,8 +29,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
+        // dd($post->slug);
+
         if (!$post->active || $post->published_at > Carbon::now()) {
             throw new NotFoundHttpException();
         }
@@ -50,6 +52,15 @@ class PostController extends Controller
             ->orderBy('published_at', 'asc')
             ->limit(1)
             ->first();
+
+        $user = $request->user();
+
+        PostView::create([
+            'user_id' => $user?->id,
+            'post_id' => $post->id,
+            'user_agent' => $request->userAgent(),
+            'ip_address' => $request->ip(),
+        ]);
 
         return view('post.view', compact('post', 'prev', 'next'));
     }
