@@ -18,7 +18,7 @@ class PostController extends Controller
     public function index(): View
     {
         $posts = Post::query()
-            ->where('active', '=', '1')
+            ->where('active', '=', true)
             ->whereDate('published_at', '<', Carbon::now())
             ->orderBy('published_at', 'desc')
             ->paginate(10);

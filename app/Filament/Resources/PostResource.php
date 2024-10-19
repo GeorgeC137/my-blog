@@ -73,8 +73,10 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('thumbnail'),
                 Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
+                    ->searchable(['title', 'body'])
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('active')
+                    ->sortable()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
@@ -91,6 +93,7 @@ class PostResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -113,6 +116,7 @@ class PostResource extends Resource
         return [
             'index' => Pages\ListPosts::route('/'),
             'create' => Pages\CreatePost::route('/create'),
+            'view' => Pages\ViewPost::route('/{record}'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
