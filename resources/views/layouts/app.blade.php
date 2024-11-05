@@ -12,13 +12,14 @@
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
     </style>
 
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+
     @livewireStyles
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-gray-50 font-family-karla">
@@ -61,14 +62,14 @@
                 <div>
                     @auth
                         <!-- Settings Dropdown -->
-                        <div class="flex sm:items-center sm:ms-6">
+                        <div class="flex sm:items-center sm:ml-6">
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                     <button
                                         class="hover:bg-blue-600 hover:text-white rounded py-2 px-4 mx-2 flex items-center">
                                         <div>{{ Auth::user()->name }}</div>
 
-                                        <div class="ms-1">
+                                        <div class="ml-1">
                                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd"
