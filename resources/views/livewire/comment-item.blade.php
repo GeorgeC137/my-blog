@@ -1,4 +1,3 @@
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 <div>
     <div class="flex mb-4 gap-3">
         <div class="rounded-full w-12 h-12 bg-gray-200 flex items-center justify-center">
@@ -17,14 +16,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
                 </a>
                 - <span class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
             </div>
-            <div class=" text-gray-700">
-                {{ $comment->comment }}
-            </div>
+
+            @if ($editing)
+                <livewire:comment-create :comment-model="$comment" />
+            @else
+                <div class=" text-gray-700">
+                    {{ $comment->comment }}
+                </div>
+            @endif
+
             <div>
                 <a href="#" class="text-indigo-600 text-sm mr-3">Reply</a>
                 @if (auth()->id() == $comment->user_id)
-                    <a href="#" class="text-blue-600 text-sm mr-3">Edit</a>
-                    <a href="#" class="text-red-600 text-sm">Delete</a>
+                    <a wire:click.prevent="startCommentEdit" href="#" class="text-blue-600 text-sm mr-3">Edit</a>
+                    <a wire:click.prevent="deleteComment" href="#" class="text-red-600 text-sm">Delete</a>
                 @endif
             </div>
         </div>
