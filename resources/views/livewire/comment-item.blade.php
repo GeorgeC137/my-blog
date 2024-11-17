@@ -26,12 +26,25 @@
             @endif
 
             <div>
-                <a href="#" class="text-indigo-600 text-sm mr-3">Reply</a>
+                <a href="#" wire:click.prevent="startReply" class="text-indigo-600 text-sm mr-3">Reply</a>
                 @if (auth()->id() == $comment->user_id)
                     <a wire:click.prevent="startCommentEdit" href="#" class="text-blue-600 text-sm mr-3">Edit</a>
                     <a wire:click.prevent="deleteComment" href="#" class="text-red-600 text-sm">Delete</a>
                 @endif
             </div>
+
+            @if ($replying)
+                <livewire:comment-create :post="$comment->post" :parent-comment="$comment" />
+            @endif
+
+            @if ($comment->comments->count())
+                <div class="mt-4">
+                    @foreach ($comment->comments as $childComment)
+                        <livewire:comment-item :comment="$childComment" wire:key="comment-{{ $childComment->id }}" />
+                    @endforeach
+                </div>
+            @endif
+
         </div>
     </div>
 </div>
