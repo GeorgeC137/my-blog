@@ -59,7 +59,11 @@
                         class="hover:bg-blue-600 hover:text-white rounded py-2 px-4 mx-2">About Us</a>
                 </div>
 
-                <div>
+                <div class="flex items-center">
+                    <form method="get" action="{{ route('search') }}">
+                        <input name="q" value="{{ request()->get('q') }}" placeholder="Type to search"
+                            class="block font-medium w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                    </form>
                     @auth
                         <!-- Settings Dropdown -->
                         <div class="flex sm:items-center sm:ml-6">
@@ -108,7 +112,7 @@
             </div>
     </nav>
 
-    <div class="container">
+    <div class="container mx-auto py-6">
         <!-- Posts Section -->
         {{ $slot }}
     </div>
