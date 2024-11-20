@@ -7,7 +7,10 @@
                     Latest Posts
                 </h2>
 
-                <x-post-item :post="$latestPost" />
+                @if ($latesPost)
+                    <x-post-item :post="$latestPost" />
+                @endif
+
             </div>
 
             {{-- Popular 3 posts --}}
