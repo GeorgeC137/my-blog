@@ -7,7 +7,7 @@
                     Latest Posts
                 </h2>
 
-                @if ($latesPost)
+                @if ($latestPost)
                     <x-post-item :post="$latestPost" />
                 @endif
 
